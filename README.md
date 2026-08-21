@@ -567,7 +567,7 @@ Lookups are `HashSet` membership tests on registry identity. Blacklist regexes a
 
 <br>
 
-Building from source needs two jars dropped into `libs/`, which are not redistributed here: `emi-1.1.24-forge.jar` and `curios-api.jar`. They are `compileOnly` — none of their code ends up in the built jar, and every integration is guarded at runtime — but `build.gradle` references them by name, so compilation fails without them. JEI comes from Maven; nothing to fetch by hand.
+Every dependency resolves from Maven — JEI from BlameJared, EMI and Curios from the Modrinth Maven. Clone and run `gradlew build`; there is nothing to download by hand. All three are `compileOnly`, so none of their code ends up in the built jar.
 
 <br>
 <br>
