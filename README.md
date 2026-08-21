@@ -432,11 +432,27 @@ Not covered in 1.x:
 
 - Loot inside **generated chests** &nbsp;— *stripped when the container is opened*
 
-- **Modded inventories** &nbsp;— *backpacks, Curios slots, ender chest*
+- The **ender chest** &nbsp;— *stripped when opened, like any other container*
 
 <br>
 
 Vanilla inventories and opened container menus are fully handled.
+
+<br>
+
+Since **1.8.0**, so are nested and modded inventories:
+
+<br>
+
+- **Curios slots** &nbsp;— *swept with the player's inventory, same creative exemption*
+
+- **Backpacks and portable containers** &nbsp;— *any item exposing the standard Forge `ITEM_HANDLER` capability, which covers Sophisticated Backpacks, TACZ loadout bags, and most others without a per-mod patch*
+
+- **Shulker boxes** &nbsp;— *read straight from item NBT, where their contents actually live*
+
+<br>
+
+Nesting is followed one bag deep — a bag inside a bag. The container itself is never destroyed, only the restricted items inside it. Player-carried containers are swept every five seconds rather than every second: an item buried in a backpack is not immediately usable, and descending into containers costs more than walking a flat inventory.
 
 <br>
 <br>
@@ -451,12 +467,12 @@ Vanilla inventories and opened container menus are fully handled.
 
 | Mod | What it adds |
 |:--|:--|
-| **JEI** | Hidden and blacklisted items removed from the index, live |
-| **EMI** | Same, through a native EMI plugin — EMI builds its own index, so this is a separate integration, not a JEI side effect |
-| **EMI++ / EMI Reliable** | Its creative-category bar above the EMI grid follows your reorganization, emptied tabs included. Pair the two and your curated categories become what **players** browse, not just admins in creative |
-| **ModernFix** | Fully compatible — its creative-tab memoization is handled *(see the technical note)* |
-| **Configured** | In-game settings screen, automatically |
-| **Creative Tab Organizer** | Complementary, not competing — it reorders and hides *whole tabs*, this mod moves *individual items* and enforces removals. Run both if you like |
+| [**JEI**](https://www.curseforge.com/minecraft/mc-mods/jei) | Hidden and blacklisted items removed from the index, live |
+| [**EMI**](https://www.curseforge.com/minecraft/mc-mods/emi) | Same, through a native EMI plugin — EMI builds its own index, so this is a separate integration, not a JEI side effect |
+| [**Reliable EMI**](https://www.curseforge.com/minecraft/mc-mods/reliable-emi) *(formerly EMI++)* | Its creative-tab based view inside EMI follows your reorganization, emptied tabs included. Pair the two and your curated categories become what **players** browse, not just admins in creative |
+| [**ModernFix**](https://www.curseforge.com/minecraft/mc-mods/modernfix) | Fully compatible — its creative-tab memoization is handled *(see the technical note)* |
+| [**Configured**](https://www.curseforge.com/minecraft/mc-mods/configured) | In-game settings screen, automatically |
+| [**Creative Tab Organizer**](https://www.curseforge.com/minecraft/mc-mods/creative-tab-organizer) | Complementary, not competing — it reorders and hides *whole tabs*, this mod moves *individual items* and enforces removals. Run both if you like |
 | **Nothing at all** | Everything works unchanged |
 
 <br>
@@ -522,7 +538,7 @@ EMI reloads asynchronously and rebuilds screen widgets when it finishes; trigger
 
 <br>
 
-Both the EMI reload and EMI++'s tab-list refresh are therefore queued and flushed on a client tick **when no screen is open** — which also batches a whole editing session into a single reload.
+Both the EMI reload and Reliable EMI's tab-list refresh are therefore queued and flushed on a client tick **when no screen is open** — which also batches a whole editing session into a single reload.
 
 <br>
 <br>
@@ -566,10 +582,6 @@ Lookups are `HashSet` membership tests on registry identity. Blacklist regexes a
 **Compiled against** JEI 15.20.0.106 and EMI 1.1.24 (`compileOnly`), Forge 47.3.0, Java 17, official mappings.
 
 <br>
-
-Every dependency resolves from Maven — JEI from BlameJared, EMI and Curios from the Modrinth Maven. Clone and run `gradlew build`; there is nothing to download by hand. All three are `compileOnly`, so none of their code ends up in the built jar.
-
-<br>
 <br>
 
 ---
@@ -583,6 +595,25 @@ The concept comes from **[CreativeTabsTweaker](https://www.curseforge.com/minecr
 <br>
 
 **[Creative Tab Organizer](https://www.curseforge.com/minecraft/mc-mods/creative-tab-organizer)** by Ziver1246 and **[MoreCreativeTabs](https://modrinth.com/mod/morecreativetabs)** cover tab-level organization on modern versions, and pair well with this mod.
+
+<br>
+<br>
+
+---
+
+## 📦 Source
+
+<br>
+
+The full source is on GitHub under the **MIT** licence — read it, build it, fork it, or open an issue.
+
+<br>
+
+**[github.com/doublescotch/items-organisator](https://github.com/doublescotch/items-organisator)**
+
+<br>
+
+Branches follow the target: **`1.20.1/forge`**. Every dependency resolves from Maven, so a clone builds with `gradlew build` alone — there is nothing to download by hand. JEI comes from the BlameJared Maven, EMI and Curios from the Modrinth Maven.
 
 <br>
 <br>
