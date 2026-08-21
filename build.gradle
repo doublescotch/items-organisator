@@ -44,16 +44,20 @@ repositories {
 }
 
 dependencies {
+    // Jars de reference (non redistribues): __REFS du projet en local,
+    // sinon libs/ pour un clone du depot public.
+    def refsDir = file('../__REFS').exists() ? file('../__REFS') : file('libs')
+
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // EMI: integration optionnelle (plugin @EmiEntrypoint, seul EMI charge la classe)
-    compileOnly files('libs/emi-1.1.24-forge.jar')
+    compileOnly files(new File(refsDir, 'emi-1.1.24-forge.jar'))
 
     // Curios: compile uniquement. CuriosPurge n'est chargee que si ModList voit "curios",
     // sinon la classe n'est jamais touchee et son API absente ne pose aucun probleme.
-    compileOnly files('libs/curios-api.jar')
+    compileOnly files(new File(refsDir, 'curios-api.jar'))
 
     // JEI API : compile uniquement, garde ModList.isLoaded("jei") au runtime
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft_version}-common-api:${project.jei_version}")
