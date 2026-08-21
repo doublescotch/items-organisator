@@ -1,0 +1,66 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+issueTrackerURL="https://github.com/doublescotch/items-organisator/issues"
+
+[[mods]]
+modId="itemsorganisator"
+version="${version}"
+displayName="Items Organisator"
+description='''Modpack authoring tool: reorganize creative tabs, move items between categories, and hide items from the pack entirely (with survival-side enforcement). Edit rules in-game from the creative screen.'''
+authors="Hell_Kaiser"
+displayURL="https://github.com/doublescotch/items-organisator"
+
+[[dependencies.itemsorganisator]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.itemsorganisator]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.itemsorganisator]]
+modId="jei"
+mandatory=false
+versionRange="[15,)"
+ordering="AFTER"
+side="BOTH"
+
+# EMI: index filtering through a native @EmiEntrypoint plugin.
+[[dependencies.itemsorganisator]]
+modId="emi"
+mandatory=false
+versionRange="[1,)"
+ordering="AFTER"
+side="CLIENT"
+
+# EMI++ / EMI Reliable: refreshes its creative-category bar after a rule change.
+[[dependencies.itemsorganisator]]
+modId="emixx"
+mandatory=false
+versionRange="[1,)"
+ordering="AFTER"
+side="CLIENT"
+
+# Configured: renders the editing-gesture config as an in-game screen. Purely optional —
+# without it the same options live in config/itemsorganisator-controls.toml.
+[[dependencies.itemsorganisator]]
+modId="configured"
+mandatory=false
+versionRange="[2,)"
+ordering="NONE"
+side="CLIENT"
+
+# ModernFix: its creative-tab memoization is busted reflectively so live edits apply.
+[[dependencies.itemsorganisator]]
+modId="modernfix"
+mandatory=false
+versionRange="[5,)"
+ordering="AFTER"
+side="CLIENT"

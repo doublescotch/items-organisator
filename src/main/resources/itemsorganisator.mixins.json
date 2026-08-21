@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "net.hellkaiser.itemsorganisator.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "itemsorganisator.refmap.json",
+  "mixins": [
+    "CreativeModeTabAccessor",
+    "CreativeModeTabMixin",
+    "CreativeModeTabRegistryMixin",
+    "CreativeModeTabsAccessor",
+    "RecipeManagerAccessor",
+    "RecipeManagerMixin"
+  ],
+  "client": [
+    "CreativeModeInventoryScreenInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,36 @@
+# Build (le buildDir reel est hors OneDrive: C:\mcbuild\...)
+build/
+out/
+bin/
+libs-repo/
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle/wrapper/gradle-wrapper.jar
+
+# Runs de dev (mondes, logs, configs generees, cache)
+run/
+runs/
+logs/
+crash-reports/
+
+# Jars de reference / dependances locales copiees a la main
+libs/*.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+.eclipse/
+eclipse/
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store

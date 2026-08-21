@@ -1,0 +1,87 @@
+plugins {
+    id 'eclipse'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
+}
+
+group = project.maven_group
+version = project.mod_version
+
+base {
+    archivesName = project.archives_base_name
+}
+
+// Build hors OneDrive: evite les verrous de synchronisation
+layout.buildDirectory = file("C:/mcbuild/items-organisator")
+
+// Java 17 OBLIGATOIRE pour MC 1.20.1
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'official', version: project.minecraft_version
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            mods { itemsorganisator { source sourceSets.main } }
+        }
+        server {
+            workingDirectory project.file('run')
+            args '--nogui'
+            mods { itemsorganisator { source sourceSets.main } }
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, 'itemsorganisator.refmap.json'
+    config 'itemsorganisator.mixins.json'
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.blamejared.com/' }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    // EMI: integration optionnelle (plugin @EmiEntrypoint, seul EMI charge la classe)
+    compileOnly files('libs/emi-1.1.24-forge.jar')
+
+    // Curios: compile uniquement. CuriosPurge n'est chargee que si ModList voit "curios",
+    // sinon la classe n'est jamais touchee et son API absente ne pose aucun probleme.
+    compileOnly files('libs/curios-api.jar')
+
+    // JEI API : compile uniquement, garde ModList.isLoaded("jei") au runtime
+    compileOnly fg.deobf("mezz.jei:jei-${project.minecraft_version}-common-api:${project.jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${project.minecraft_version}-forge-api:${project.jei_version}")
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/mods.toml') {
+        expand 'version': project.version
+    }
+}
+
+jar {
+    manifest {
+        attributes([
+                'Specification-Title'   : 'itemsorganisator',
+                'Specification-Vendor'  : 'Hell_Kaiser',
+                'Specification-Version' : '1',
+                'Implementation-Title'  : project.name,
+                'Implementation-Version': project.jar.archiveVersion,
+                'Implementation-Vendor' : 'Hell_Kaiser',
+                'MixinConfigs'          : 'itemsorganisator.mixins.json'
+        ])
+    }
+    finalizedBy 'reobfJar'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
