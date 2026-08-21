@@ -566,6 +566,10 @@ Lookups are `HashSet` membership tests on registry identity. Blacklist regexes a
 **Compiled against** JEI 15.20.0.106 and EMI 1.1.24 (`compileOnly`), Forge 47.3.0, Java 17, official mappings.
 
 <br>
+
+Building from source needs two jars dropped into `libs/`, which are not redistributed here: `emi-1.1.24-forge.jar` and `curios-api.jar`. They are `compileOnly` — none of their code ends up in the built jar, and every integration is guarded at runtime — but `build.gradle` references them by name, so compilation fails without them. JEI comes from Maven; nothing to fetch by hand.
+
+<br>
 <br>
 
 ---
