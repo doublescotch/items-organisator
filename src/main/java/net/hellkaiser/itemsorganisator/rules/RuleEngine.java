@@ -35,13 +35,7 @@ public final class RuleEngine {
         };
 
         CreativeModeTabAccessor acc = (CreativeModeTabAccessor) tab;
-        int before = acc.itemsorganisator$getDisplayItems().size();
         acc.itemsorganisator$getDisplayItems().removeIf(remove);
         acc.itemsorganisator$getDisplayItemsSearchTab().removeIf(remove);
-        int removed = before - acc.itemsorganisator$getDisplayItems().size();
-        if (removed > 0) {
-            org.slf4j.LoggerFactory.getLogger("itemsorganisator")
-                    .info("[diag] filterTab {}: {} retire(s) sur {}", tabId, removed, before);
-        }
     }
 }

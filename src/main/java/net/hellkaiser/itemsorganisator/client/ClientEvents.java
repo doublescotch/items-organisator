@@ -109,7 +109,13 @@ public final class ClientEvents {
         double relX = event.getMouseX() - screen.getGuiLeft();
         double relY = event.getMouseY() - screen.getGuiTop();
         CreativeModeInventoryScreenInvoker invoker = (CreativeModeInventoryScreenInvoker) screen;
-        for (CreativeModeTab tab : CreativeModeTabs.tabs()) {
+        // UNIQUEMENT les onglets de la PAGE AFFICHEE. Forge positionne chaque
+        // onglet AU SEIN de sa page: deux onglets de pages differentes partagent
+        // la meme hitbox, et tester tout le registre faisait gagner le premier
+        // enregistre — systematiquement un onglet vanilla ("Blocs colores",
+        // 2e du registre) a la place de l'onglet modde clique (bug in-game du
+        // 2026-08-22, le risque n1 identifie des la conception).
+        for (CreativeModeTab tab : screen.getCurrentPage().getVisibleTabs()) {
             if (tab.getType() != CreativeModeTab.Type.CATEGORY) continue;
             boolean hit;
             try {
