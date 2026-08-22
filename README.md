@@ -422,6 +422,10 @@ The client UI reads them; the server enforces them. A player editing their local
 
 <br>
 
+**Testing status** — the in-game editing workflow (tab and item moves across a multi-page, 280-mod pack), the Hidden/blacklist tiers and the live JEI/EMI filtering are **validated in game on an integrated server** (single player / Open to LAN), where the server enforcement also runs. A **dedicated client/server split has not been through a full test pass yet** — the design separates sides cleanly, but treat that setup as beta and report anything odd.
+
+<br>
+
 Not covered in 1.x:
 
 <br>
