@@ -468,7 +468,7 @@ Nesting is followed one bag deep — a bag inside a bag. The container itself is
 | Mod | What it adds |
 |:--|:--|
 | [**JEI**](https://www.curseforge.com/minecraft/mc-mods/jei) | Hidden and blacklisted items removed from the index, live |
-| [**EMI**](https://www.curseforge.com/minecraft/mc-mods/emi) | Same, through a native EMI plugin — EMI builds its own index, so this is a separate integration, not a JEI side effect |
+| [**EMI**](https://www.curseforge.com/minecraft/mc-mods/emi) | Same, through a native EMI plugin — EMI builds its own index, so this is a separate integration, not a JEI side effect. One quirk to know: EMI deliberately suppresses **all** game toasts while an inventory screen is open, so confirmation toasts (ours included) appear once you close the screen — expected behavior, not a bug |
 | [**Reliable EMI**](https://www.curseforge.com/minecraft/mc-mods/reliable-emi) *(formerly EMI++)* | Its creative-tab based view inside EMI follows your reorganization, emptied tabs included. Pair the two and your curated categories become what **players** browse, not just admins in creative |
 | [**ModernFix**](https://www.curseforge.com/minecraft/mc-mods/modernfix) | Fully compatible — its creative-tab memoization is handled *(see the technical note)* |
 | [**Configured**](https://www.curseforge.com/minecraft/mc-mods/configured) | In-game settings screen, automatically |
